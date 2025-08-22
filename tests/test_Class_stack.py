@@ -36,3 +36,11 @@ def test_stack_push_2(stack, data):
     res = stack.count
 
     assert expected == res, f'Ожидалось{expected}: Получили:{res}'
+
+
+def test_stack_peek(stack):
+    expected = None
+
+    res = stack.peek()
+
+    assert expected == res, f'Ожидалось{expected}: Получили:{res}'
