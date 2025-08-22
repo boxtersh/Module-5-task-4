@@ -18,7 +18,17 @@ def test_stack_is_empty():
     assert expected == res, f'Ожидалось{expected}: Получили:{res}'
 
 
-def test_stack_push(stack, data):
+def test_stack_push_1(stack, data):
+    expected = 1
+
+    stack.push(data)
+
+    res = stack.count
+
+    assert expected == res, f'Ожидалось{expected}: Получили:{res}'
+
+
+def test_stack_push_2(stack, data):
     expected = 3
 
     stack.push(data), stack.push(data), stack.push(data)
