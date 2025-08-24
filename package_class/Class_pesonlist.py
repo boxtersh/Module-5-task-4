@@ -31,6 +31,15 @@ class PesonList:
 
     class Node:
         def __init__(self, data: PersonCard, next=None):
-            self.__data = data
-            self.__next = next
+            self.data = data
+            self.next = next
 
+    def add_person(self, name, age, occupation):
+        person = PersonCard(name, age, occupation)
+        node = PesonList.Node(person)
+
+        if not self.__count==0:
+            self.__head.next = node
+
+        self.__head = node
+        self.__count += 1
