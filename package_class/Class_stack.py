@@ -40,6 +40,10 @@ class TasksStack:
             self.__count -= 1
             return target
 
+    def clean(self):
+        self.__top = None
+        self.__count = 0
+
     def count(self):
         return self.__count
 
