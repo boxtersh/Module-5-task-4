@@ -34,7 +34,7 @@ class PesonList:
             self.data = data
             self.next = next
 
-    def add_person(self, name, age, occupation):
+    def append_person(self, name, age, occupation):
         person = PersonCard(name, age, occupation)
         node = PesonList.Node(person)
 
