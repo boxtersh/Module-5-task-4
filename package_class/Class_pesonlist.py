@@ -35,6 +35,9 @@ class PesonList:
             self.data = data
             self.next = next
 
+    def is_empty(self):
+        return self.__count == 0
+
     def add_person(self, name, age, occupation):
         person = PersonCard(name, age, occupation)
         node = PesonList.Node(person)
@@ -60,3 +63,22 @@ class PesonList:
 
         self.__tail = node
         self.__count += 1
+
+    def insert_person_at(self, index, name, age, occupation):
+        assert isinstance(index, int), f'Ожидалось: <class int>, получили: {type(index)}'
+
+        if index > self.__count or index < 0:
+            raise ValueError(f'index позиции должен быть >= 0 или <= {self.__count}')
+
+        person = PersonCard(name, age, occupation)
+        node = PesonList.Node(person)
+
+        real = self.__head
+
+        if index <= middle:
+            for i in range(1, index):
+                real = real.next
+            node.next = real
+            real = node
+
+
