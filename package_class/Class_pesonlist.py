@@ -125,3 +125,22 @@ class PesonList:
         self.__head = self.__head.next
         self.__count -= 1
         return target
+
+    def remove_last_person(self) -> None | PersonCard:
+        """
+        Функция возвращает последнюю карточку из списка
+        :return: объект класса PersonCard
+        """
+        if self.is_empty():
+            return
+
+        real = self.__head
+        target = self.__tail
+
+        for _ in range(1, self.__count - 1):
+            real = real.next
+
+        self.__tail = real
+        self.__tail.next = None
+        self.__count -= 1
+        return target
