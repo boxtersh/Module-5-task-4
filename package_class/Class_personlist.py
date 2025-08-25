@@ -11,11 +11,11 @@ class PersonCard:
             return name
 
     def __check_age(self, age):
-        while not isinstance(age, int) and (14 <= age or age <= 90):
+        while not isinstance(age, int) and (14 > age or age > 90):
             print('Возраст персоны должен быть целым числом в интервале 14 - 90 лет')
             age = input('Введите возраст в интервале 14 - 90 лет')
             # Выполняется детальная проверка на соответствие age возрасту персоны в цикле while
-            return int(age)
+        return int(age)
 
     def __check_occupation(self, occupation):
         if not isinstance(occupation, str):
@@ -23,8 +23,21 @@ class PersonCard:
             # Выполняется детальная проверка на соответствие occupation профессия персоны в цикле while
             return occupation
 
+    def __get_name(self):
+        return self.__name
 
-class PesonList:
+    def __get_age(self):
+        return self.__age
+
+    def __get_occupation(self):
+        return self.__occupation
+
+    name = property(__get_name)
+    age = property(__get_age)
+    occupation = property(__get_occupation)
+
+
+class PersonList:
     def __init__(self):
         self.__head = None
         self.__tail = None
@@ -48,7 +61,7 @@ class PesonList:
         """
 
         person = PersonCard(name, age, occupation)
-        node = PesonList.Node(person)
+        node = PersonList.Node(person)
 
         if self.is_empty():
             self.__tail = node
@@ -68,7 +81,7 @@ class PesonList:
         :return:
         """
         person = PersonCard(name, age, occupation)
-        node = PesonList.Node(person)
+        node = PersonList.Node(person)
 
         if self.is_empty():
             self.__head = node
@@ -98,7 +111,7 @@ class PesonList:
             raise ValueError(f'index позиции должен быть >= 1 или <= {self.__count}')
 
         person = PersonCard(name, age, occupation)
-        node = PesonList.Node(person)
+        node = PersonList.Node(person)
         real = self.__head
 
         if index == 1:
@@ -144,3 +157,28 @@ class PesonList:
         self.__tail.next = None
         self.__count -= 1
         return target
+
+    def remove_person(self, name: str, age: int, occupation: str) -> None:
+        if self.is_empty():
+            return
+
+        real = self.__head
+        while (real.data.name == name and real.data.age == age and real.data.occupation == occupation) or real.next == None:
+                real = real.next
+                self.__count -= 1
+
+    def total_people(self) -> int:
+        """
+        Функция возвращает количество карточек в списке
+        :return: количество карточек в списке
+        """
+        return self.__count
+
+    def clear_all(self) -> None:
+        """
+        Функция удаляет все карточки
+        :return: None
+        """
+        self.__head = None
+        self.__tail = None
+        self.__count = 0
