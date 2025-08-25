@@ -112,3 +112,16 @@ class PesonList:
         node.next = real.next
         real.next = node
         self.__count += 1
+
+    def remove_first_person(self) -> None | PersonCard:
+        """
+        Функция возвращает первую карточку из списка
+        :return: объект класса PersonCard
+        """
+        if self.is_empty():
+            return
+
+        target = self.__head
+        self.__head = self.__head.next
+        self.__count -= 1
+        return target
