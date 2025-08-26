@@ -49,12 +49,11 @@ def test_stack_peek_1(stack):
 
 
 def test_stack_peek_2(stack, data):
-    expected = "<class 'package_class.Class_stack.ProjectTask'>"
+    expected = 'Дела'
 
     stack.push(data)
 
-    res = str(type(stack.peek()))
-
+    res = stack.top.data.description
     assert expected == res, f'Ожидалось{expected}: Получили:{res}'
 
 

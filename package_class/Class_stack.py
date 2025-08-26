@@ -2,11 +2,16 @@
 
 class ProjectTask:
     def __init__(self, description: str, datetime: int):
-        self.__string_description = description
+        self.__description = description
         self.__datetime = datetime
 
     def __repr__(self):
-        return f'Дела: {self.__string_description}\nВремя выполнения: {self.__datetime}ч.'
+        return f'Дела: {self.__description}\nВремя выполнения: {self.__datetime}ч.'
+
+    def __get_description(self):
+        return self.__description
+
+    description = property(__get_description)
 
 class TasksStack:
 
@@ -48,4 +53,9 @@ class TasksStack:
         return self.__count
 
     count = property(count)
+
+    def top(self):
+        return self.__top
+
+    top = property(top)
 
