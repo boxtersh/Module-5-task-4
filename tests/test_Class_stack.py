@@ -51,10 +51,9 @@ def test_stack_peek_1(stack):
 def test_stack_peek_2(stack, data):
     expected = 'Дела'
 
-    stack.push(data)
+    res = stack.peek()
 
-    res = stack.top.data.description
-    assert expected == res, f'Ожидалось{expected}: Получили:{res}'
+    assert expected == res, f'Ожидалось: {expected} Получили: {res}'
 
 
 def test_stack_pop_1(stack, data):

@@ -169,7 +169,8 @@ class PersonList:
         if self.is_empty():
             return
 
-        if (self.__head.data.name == name and self.__head.data.age == age and self.__head.data.occupation == occupation):
+        if (
+                self.__head.data.name == name and self.__head.data.age == age and self.__head.data.occupation == occupation):
             self.__head = self.__head.next
             self.__count -= 1
             return
@@ -199,7 +200,15 @@ class PersonList:
         self.__tail = None
         self.__count = 0
 
+    def __get_count(self):
+        return self.__count
+
     def __get_head(self):
         return self.__head
 
+    def __get_tail(self):
+        return self.__tail
+
+    count = property(__get_count)
     head = property(__get_head)
+    tail = property(__get_tail)
