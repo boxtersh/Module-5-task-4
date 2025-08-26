@@ -8,7 +8,7 @@ class PersonCard:
         if not isinstance(name, str):
             name = str(name)
             # Выполняется детальная проверка на соответствие name имени персоны в цикле while
-            return name
+        return name
 
     def __check_age(self, age):
         while not isinstance(age, int) and (14 > age or age > 90):
@@ -21,7 +21,7 @@ class PersonCard:
         if not isinstance(occupation, str):
             occupation = str(occupation)
             # Выполняется детальная проверка на соответствие occupation профессия персоны в цикле while
-            return occupation
+        return occupation
 
     def __get_name(self):
         return self.__name
@@ -148,7 +148,7 @@ class PersonList:
             return
 
         real = self.__head
-        target = self.__tail
+        target = self.__tail.data
 
         for _ in range(1, self.__count - 1):
             real = real.next
@@ -159,13 +159,29 @@ class PersonList:
         return target
 
     def remove_person(self, name: str, age: int, occupation: str) -> None:
+        """
+        Функция удаляет курточку с указанными полями
+        :param name: поле класса PersonCard
+        :param age: поле класса PersonCard
+        :param occupation: поле класса PersonCard
+        :return: None
+        """
         if self.is_empty():
             return
 
+        if (self.__head.data.name == name and self.__head.data.age == age and self.__head.data.occupation == occupation):
+            self.__head = self.__head.next
+            self.__count -= 1
+            return
+
         real = self.__head
-        while (real.data.name == name and real.data.age == age and real.data.occupation == occupation) or real.next == None:
-                real = real.next
+
+        for _ in range(1, self.__count):
+            if (real.next.data.name == name and real.next.data.age == age and real.next.data.occupation == occupation):
+                real.next = real.next.next
                 self.__count -= 1
+                return
+            real = real.next
 
     def total_people(self) -> int:
         """
@@ -182,3 +198,8 @@ class PersonList:
         self.__head = None
         self.__tail = None
         self.__count = 0
+
+    def __get_head(self):
+        return self.__head
+
+    head = property(__get_head)
