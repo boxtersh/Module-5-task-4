@@ -2,16 +2,24 @@
 
 class ProjectTask:
     def __init__(self, description: str, datetime: int):
-        self.__description = description
-        self.__datetime = datetime
+        self.__description = self.__check_type(description, str)
+        self.__datetime = self.__check_type(datetime, int)
+
+    def __check_type(self, value , types):
+        assert isinstance(value, types), f'Ожидали:{types}, получили:{type(value)}'
+        return value
 
     def __repr__(self):
         return f'Дела: {self.__description}\nВремя выполнения: {self.__datetime}ч.'
 
-    def __get_description(self):
+    @property
+    def description(self):
         return self.__description
 
-    description = property(__get_description)
+    @property
+    def datetime(self):
+        return self.__datetime
+
 
 class TasksStack:
 
@@ -49,13 +57,10 @@ class TasksStack:
         self.__top = None
         self.__count = 0
 
+    @property
     def count(self):
         return self.__count
 
-    count = property(count)
-
+    @property
     def top(self):
         return self.__top
-
-    top = property(top)
-
