@@ -36,9 +36,7 @@ class TasksStack:
         return self.__count == 0
 
     def push(self, node: Node):
-        if not self.is_empty():
-            node.prev = self.__top
-
+        node.prev = self.__top
         self.__top = node
         self.__count += 1
 

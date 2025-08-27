@@ -23,35 +23,35 @@ class PersonCard:
             # Выполняется детальная проверка на соответствие occupation профессия персоны в цикле while
         return occupation
 
-    def __get_name(self):
+    @property
+    def name(self):
         return self.__name
 
-    def __get_age(self):
+    @property
+    def age(self):
         return self.__age
 
-    def __get_occupation(self):
+    @property
+    def occupation(self):
         return self.__occupation
-
-    name = property(__get_name)
-    age = property(__get_age)
-    occupation = property(__get_occupation)
 
 
 class PersonList:
-    def __init__(self):
-        self.__head = None
-        self.__tail = None
-        self.__count = 0
 
     class Node:
         def __init__(self, data: PersonCard, next=None):
             self.data = data
             self.next = next
 
-    def is_empty(self):
-        return self.__count == 0
+    def __init__(self):
+        self.__head = None
+        self.__tail = None
+        self.__count = 0
 
-    def add_person(self, name: str, age: int, occupation: str) -> None:
+    def is_empty(self):
+        return self.__head is None
+
+    def add_person(self, person: PersonCard) -> None:
         """
         Функция добавляет карточку class PersonCard в начало списка
         :param name: поле class PersonCard
@@ -59,8 +59,6 @@ class PersonList:
         :param occupation: поле class PersonCard
         :return:
         """
-
-        person = PersonCard(name, age, occupation)
         node = PersonList.Node(person)
 
         if self.is_empty():
@@ -72,7 +70,7 @@ class PersonList:
         self.__head = node
         self.__count += 1
 
-    def append_person(self, name: str, age: int, occupation: str) -> None:
+    def append_person(self, person: PersonCard) -> None:
         """
         Функция добавляет карточку class PersonCard в конец списка
         :param name: поле class PersonCard
@@ -80,7 +78,6 @@ class PersonList:
         :param occupation: поле class PersonCard
         :return:
         """
-        person = PersonCard(name, age, occupation)
         node = PersonList.Node(person)
 
         if self.is_empty():
@@ -92,7 +89,7 @@ class PersonList:
         self.__tail = node
         self.__count += 1
 
-    def insert_person_at(self, index: int, name: str, age: int, occupation: str) -> None:
+    def insert_person_at(self, index: int, person: PersonCard) -> None:
         """
         Функция вставляет элемент по номеру в списке
         Пример: index = 3, data = A
@@ -107,10 +104,8 @@ class PersonList:
         """
         assert isinstance(index, int), f'Ожидалось: <class int>, получили: {type(index)}'
 
-        if index > self.__count or index < 1:
-            raise ValueError(f'index позиции должен быть >= 1 или <= {self.__count}')
+        assert index <= self.__count and index >= 1, f'index позиции должен быть >= 1 или <= {self.__count}'
 
-        person = PersonCard(name, age, occupation)
         node = PersonList.Node(person)
         real = self.__head
 
@@ -134,7 +129,7 @@ class PersonList:
         if self.is_empty():
             return
 
-        target = self.__head
+        target = self.__head.data
         self.__head = self.__head.next
         self.__count -= 1
         return target
@@ -158,7 +153,7 @@ class PersonList:
         self.__count -= 1
         return target
 
-    def remove_person(self, name: str, age: int, occupation: str) -> None:
+    def remove_person(self, person: PersonCard) -> None:
         """
         Функция удаляет курточку с указанными полями
         :param name: поле класса PersonCard
@@ -166,11 +161,11 @@ class PersonList:
         :param occupation: поле класса PersonCard
         :return: None
         """
+        name, age, occupation = person.name, person.age, person.occupation
         if self.is_empty():
             return
 
-        if (
-                self.__head.data.name == name and self.__head.data.age == age and self.__head.data.occupation == occupation):
+        if (self.__head.data.name == name and self.__head.data.age == age and self.__head.data.occupation == occupation):
             self.__head = self.__head.next
             self.__count -= 1
             return
@@ -200,15 +195,14 @@ class PersonList:
         self.__tail = None
         self.__count = 0
 
-    def __get_count(self):
+    @property
+    def count(self):
         return self.__count
 
-    def __get_head(self):
+    @property
+    def head(self):
         return self.__head
 
-    def __get_tail(self):
+    @property
+    def tail(self):
         return self.__tail
-
-    count = property(__get_count)
-    head = property(__get_head)
-    tail = property(__get_tail)
