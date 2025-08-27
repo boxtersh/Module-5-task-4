@@ -1,4 +1,24 @@
-class Queue:
+from typing import Any
+
+class PrintDocument:
+    def __init__(self,document: str, number_page: int):
+        self.__document = self.__check_type(document, str)
+        self.__number_page = self.__check_type(number_page, int)
+
+    def __check_type(self, value , types):
+        assert isinstance(value, types), f'Ожидали:{types}, получили:{type(value)}'
+        return value
+
+    @property
+    def document(self):
+        return self.__document
+
+    @property
+    def number_page(self):
+        return self.__number_page
+
+
+class PrintQueue:
 
     class Node:
 
@@ -15,7 +35,7 @@ class Queue:
         return self.__head == None
 
     def enqueue(self, data) -> None:
-        node = Queue.Node(data)
+        node = PrintQueue.Node(data)
 
         if self.is_empty():
             self.__head = node
@@ -25,7 +45,7 @@ class Queue:
         self.__tail = node
         self.__count += 1
 
-    def dequeue(self) -> any:
+    def dequeue(self) -> Any:
 
         if self.is_empty(): return
 
@@ -40,9 +60,21 @@ class Queue:
 
         return data
 
-    def peek(self) -> any:
+    def peek(self) -> Any:
 
         if not self.is_empty():
             return self.__head.data
 
         return None
+
+    @property
+    def count(self):
+        return self.__count
+
+    @property
+    def head(self):
+        return self.__head
+
+    @property
+    def tail(self):
+        return self.__tail
