@@ -173,10 +173,6 @@ def test_insert_out_range_1(pList, data):
 
 
 def test_insert_out_range_2(pList, data):
-    expected = 5
-    expected_1 = 53
-    expected_2 = 43
-
     data1 = data('1', 13, '1')
     data2 = data('2', 23, '2')
     data3 = data('3', 35, '3')
@@ -188,5 +184,19 @@ def test_insert_out_range_2(pList, data):
     with pytest.raises(AssertionError):
         pList.insert_person_at(5, data5)
 
+
+def test_remove_first_person(pList, data):
+    expected = 13
+
+    data1 = data('1', 13, '1')
+    data2 = data('2', 23, '2')
+    data3 = data('3', 35, '3')
+    data4 = data('4', 43, '4')
+    pList = pList()
+    pList.add_person(data4), pList.add_person(data3), pList.add_person(data2), pList.add_person(data1)
+
+    res = pList.remove_first_person().age
+
+    assert res == expected, f'Ожидали: {expected}, получили: {res}'
 
 
