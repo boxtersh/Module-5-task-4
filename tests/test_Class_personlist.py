@@ -200,3 +200,129 @@ def test_remove_first_person(pList, data):
     assert res == expected, f'Ожидали: {expected}, получили: {res}'
 
 
+def test_remove_first_person_isempty_list(pList):
+    expected = None
+
+    pList = pList()
+
+    res = pList.remove_first_person()
+
+    assert res == expected, f'Ожидали: {expected}, получили: {res}'
+
+
+def test_remove_last_person(pList, data):
+    expected = 43
+
+    data1 = data('1', 13, '1')
+    data2 = data('2', 23, '2')
+    data3 = data('3', 35, '3')
+    data4 = data('4', 43, '4')
+    pList = pList()
+    pList.add_person(data4), pList.add_person(data3), pList.add_person(data2), pList.add_person(data1)
+
+    res = pList.remove_last_person().age
+
+    assert res == expected, f'Ожидали: {expected}, получили: {res}'
+
+
+def test_remove_last_person_isempty_list(pList):
+    expected = None
+
+    pList = pList()
+
+    res = pList.remove_last_person()
+
+    assert res == expected, f'Ожидали: {expected}, получили: {res}'
+
+
+def test_remove_person_positive_isempty_list(pList, data):
+    expected = None
+
+    data_del = data('2', 23, '2')
+    pList = pList()
+
+    res = pList.remove_person(data_del)
+
+    assert res == expected, f'Ожидали: {expected}, получили: {res}'
+
+
+def test_remove_person_positive(pList, data):
+    expected = 3
+
+    data1 = data('1', 13, '1')
+    data2 = data('2', 23, '2')
+    data3 = data('3', 35, '3')
+    data4 = data('4', 43, '4')
+    data_del = data('2', 23, '2')
+    pList = pList()
+    pList.add_person(data4), pList.add_person(data3), pList.add_person(data2), pList.add_person(data1)
+    pList.remove_person(data_del)
+
+    res = pList.count
+
+    assert res == expected, f'Ожидали: {expected}, получили: {res}'
+
+
+def test_remove_person_negative(pList, data):
+    expected = 4
+
+    data1 = data('1', 13, '1')
+    data2 = data('2', 23, '2')
+    data3 = data('3', 35, '3')
+    data4 = data('4', 43, '4')
+    data_del = data('2', 27, '2')
+    pList = pList()
+    pList.add_person(data4), pList.add_person(data3), pList.add_person(data2), pList.add_person(data1)
+    pList.remove_person(data_del)
+
+    res = pList.count
+
+    assert res == expected, f'Ожидали: {expected}, получили: {res}'
+
+
+def test_remove_person_negative_first_position(pList, data):
+    expected = 3
+
+    data1 = data('1', 13, '1')
+    data2 = data('2', 23, '2')
+    data3 = data('3', 35, '3')
+    data4 = data('4', 43, '4')
+    data_del = data('1', 13, '1')
+    pList = pList()
+    pList.add_person(data4), pList.add_person(data3), pList.add_person(data2), pList.add_person(data1)
+    pList.remove_person(data_del)
+
+    res = pList.count
+
+    assert res == expected, f'Ожидали: {expected}, получили: {res}'
+
+
+def test_total_people(pList, data):
+    expected = 4
+
+    data1 = data('1', 13, '1')
+    data2 = data('2', 23, '2')
+    data3 = data('3', 35, '3')
+    data4 = data('4', 43, '4')
+    pList = pList()
+    pList.add_person(data4), pList.add_person(data3), pList.add_person(data2), pList.add_person(data1)
+
+    res = pList.total_people()
+
+    assert res == expected, f'Ожидали: {expected}, получили: {res}'
+
+
+def test_clear_all(pList, data):
+    expected = 0
+
+    data1 = data('1', 13, '1')
+    data2 = data('2', 23, '2')
+    data3 = data('3', 35, '3')
+    data4 = data('4', 43, '4')
+    pList = pList()
+    pList.add_person(data4), pList.add_person(data3), pList.add_person(data2), pList.add_person(data1)
+    pList.clear_all()
+
+    res = pList.count
+
+    assert res == expected, f'Ожидали: {expected}, получили: {res}'
